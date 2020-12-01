@@ -1,3 +1,4 @@
+``` java
 public class QuickSort {
     public static int divide(int[] a, int start, int end){
         int base = a[end];//每次都以最右边的元素作为基准值
@@ -46,3 +47,5 @@ public class QuickSort {
     }
     
 }
+//java
+``` 
