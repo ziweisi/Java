@@ -1,0 +1,59 @@
+public class IteratorDemo {
+    public static void main(String[] args) {
+        // 使用多态方式 创建对象
+        Collection<String> coll = new ArrayList<String>();
+        // 添加元素到集合
+        coll.add("串串星人");
+        coll.add("吐槽星人");
+        coll.add("汪星人");
+        //遍历
+        //使用迭代器 遍历  每个集合对象都有自己的迭代器
+        Iterator<String> it = coll.iterator();
+        //  泛型指的是 迭代出 元素的数据类型
+        while (it.hasNext()) { //判断是否有迭代元素
+            String s = it.next();//获取迭代出的元素
+            System.out.println(s);
+        }
+    }
+
+@Test
+    public void test02() {
+        Collection<Integer> coll = new ArrayList<>();
+        coll.add(1);
+        coll.add(2);
+        coll.add(3);
+        coll.add(4);
+
+//      coll.remove(?)//无法编写
+
+        Iterator<Integer> iterator = coll.iterator();
+        while (iterator.hasNext()) {
+            //Integer element = iterator.next();
+            if ( iterator.next() % 2 == 0) {
+//              coll.remove(element);//错误的
+                iterator.remove();
+            }
+        }
+        System.out.println(coll);
+    }
+@Test
+    public void test03() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("hello");
+        list.add("java");
+        list.add("xxx");
+        list.add("world");
+//以下代码没有发生ConcurrentModificationException异常
+        Iterator<String> iterator = list.iterator();
+        while(iterator.hasNext()){
+            String str = iterator.next();
+            if("xxx".equals(str)) {
+                list.remove(str);
+            }
+            System.out.println(str);
+        }
+
+
+    }
+
+}
