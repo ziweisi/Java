@@ -1,0 +1,31 @@
+public class HDFSDemo {
+    private FileSystem fs;//创建文件流
+    @Before
+    public void before() throws Exception {
+        //获取连接对象
+        Configuration conf = new Configuration();
+        // conf.set("fs.defaultFs","hdfs");
+        fs = FileSystem.get(new URI("hdfs://hadoop102:9820"), conf, "xxx");
+    }
+
+    @Test
+    public void test() throws IOException {
+
+        fs.copyFromLocalFile(false, true, new Path("D:\\IO\\集群搭建步骤.txt"), new Path("/"));
+        // fs.close();
+
+
+    }
+
+    @Test
+    public void test01() throws IOException {
+      fs.copyToLocalFile(false,new Path("/IO"),new Path("D:/IO"),true);
+    }
+    ///关闭信息流
+    @After
+    public void after() throws IOException {
+        fs.close();
+
+
+    }
+}
