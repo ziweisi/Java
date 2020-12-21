@@ -1,0 +1,17 @@
+public class listdemo {
+    @Test
+    public void test01() {
+        List list = new ArrayList();//初始化为3.
+        list.add(123);
+        list.add(2);
+        list.add(2);
+        list.add(6);
+        list.add(89);
+        list.add(1234);
+        System.out.println(list.size());
+        List dest = Arrays.asList(new Object[list.size()]);//底层依然是数组。
+        Collections.copy(dest, list);
+        dest.set(0, 34);
+        System.out.println(dest);
+    }
+}
