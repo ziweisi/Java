@@ -1,0 +1,7 @@
+#！/bin/bash
+for host in hadoop102 hadoop103 hadoop104
+ do 
+    echo "*************$host**********"//打印出双引号内容，注意双引号与命令之间有空格
+    ssh $host zkServer.sh $1 //$该符号表示取值，$1表示有一个参数需要用户自己填写
+ done
+ ////以上程序用于启动zookeeper集群
