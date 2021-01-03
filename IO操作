@@ -1,0 +1,80 @@
+package MyIO;
+
+import org.junit.Test;
+
+import java.io.File;
+import java.io.IOException;
+
+/**
+ * Created by Zi Wei on 2020/12/5 22:18
+ */
+
+public class FileCreateDelete {
+
+
+    public static void main(String[] args) throws IOException {
+// 文件的创建
+        File f = new File("d:/aaa.txt");
+        System.out.println("是否存在:" + f.exists()); // false
+        System.out.println("是否创建:" + f.createNewFile()); // true
+        System.out.println("是否存在:" + f.exists()); // true
+    }
+
+    // 目录的创建
+//        File f2 = new File("newDir");//其中newDir为新建目录的文件夹名称。
+//        System.out.println("是否存在:" + f2.exists());// false
+//        System.out.println("是否创建:" + f2.mkdir()); // true
+//        System.out.println("是否存在:" + f2.exists());// true
+//// 创建多级目录
+//        File f3 = new File("newDira\\newDirb");
+//        System.out.println(f3.mkdir());// false
+//        File f4 = new File("newDira\\newDirb");
+//        System.out.println(f4.mkdirs());// true
+////// 文件的删除
+//        System.out.println(f.delete());// true
+//        // 目录的删除
+//        System.out.println(f2.delete());// true
+//        System.out.println(f4.delete());// false
+//    }
+    @Test
+    public void test9() {
+        File src = new File("d:/atguigu/javase/HelloIO.java");
+        try {
+            src.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File dest = new File("d:/atguigu/javase/HelloFile.java");
+        src.renameTo(dest);
+    }
+
+    @Test
+    public void test10() {
+        File src = new File("d:/atguigu/javase/HelloIO.java");
+        File dest = new File("e:/HelloFile.java");
+        //D盘和E盘相同的文件系统可以成功，例如都是NTFS。
+        src.renameTo(dest);
+    }
+
+    @Test
+    public void test7() {
+        File dir = new File("D:/atguigu/javase");
+        try {
+            dir.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //  File dest = new File("D:/atguigu/java代码");
+      //  dir.renameTo(dest);
+    }
+//    @Test
+//    public void test8() {
+//        File dir = new File("D:/atguigu/javase");
+//        File dest = new File("D:/temp");
+//        dir.renameTo(dest);
+//    }
+
+}
+
+
+
