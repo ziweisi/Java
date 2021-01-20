@@ -1,0 +1,98 @@
+package com.atguigu.chapter08
+
+class Person1(val name:String,var age:Int,address:String)
+
+object Person1{
+
+  def apply(name:String,age:Int,address:String) = new Person1(name,age,address)
+}
+
+object $08_MatchClass {
+
+  case class Person(val name:String,var age:Int,address:String)
+
+
+  case object AA
+
+  abstract class Sex
+
+  case object Man extends Sex
+  case object WoMan extends Sex
+  def printSex(sex:Sex)  = {
+    println(sex)
+  }
+
+  case class Region(regionName:String,school:School)
+
+  case class School(schoolName:String,clazz:Clazz)
+
+  case class Clazz(className:String,stu:Student)
+
+  case class Student(name:String,age:Int)
+  /**
+    * 样例类: case class 类名([val/var] 属性名:类型,...)
+    * 创建样例类对象: 类名(值,...)
+    *   用于封装数据
+    *   val/var如果没写，默认是val修饰的
+    *
+    * 样例对象: case object 名称
+    * 获取样例对象: object名称
+    *     作为枚举值使用
+    *
+    * 普通类默认不能直接用于模式匹配,要想用于模式匹配需要在伴生对象中定义unapply方法,将对象解构成属性值
+    * @param args
+    */
+  def main(args: Array[String]): Unit = {
+
+    val person = Person("zhangsan",20,"shenzhen")
+
+    val person1 = Person1("zhangsan",20,"shenzhen")
+    println(person)
+
+    println(AA)
+
+    printSex(Man)
+
+    val list2 = List[Region](
+
+      Region("宝安区",School("宝安中学",Clazz("法师班",Student("安其拉",20)))),
+      Region("宝安区",School("宝安中学",Clazz("法师班",Student("米拉迪",20)))),
+      Region("宝安区",School("宝安中学",Clazz("法师班",Student("狄迪拉",20)))),
+      Region("宝安区",School("宝安中学",Clazz("法师班",Student("佩恩",20))))
+    )
+
+    list2.foreach(x=>println(x.school.clazz.stu.name))
+
+    //样例类的模式匹配
+    person match{
+      case Person(x,y,z) => println(x,y,z)
+    }
+
+    val bb = new PPPP("wangwu",20)
+
+    bb match{
+      case PPPP(name,age) => println(name,age)
+    }
+
+  }
+
+
+
+
+}
+
+class PPPP(val name:String,val age:Int){
+
+}
+
+object PPPP{
+
+  def unapply(arg: PPPP): Option[(String, Int)] = {
+    if(arg==null)
+      None
+    else{
+      Some((arg.name,arg.age))
+    }
+
+  }
+}
